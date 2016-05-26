@@ -23,9 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
 app.post('/upload',multipart(), controllers.upload);  // 上传
-
 app.get('/show', controllers.show);   //  展示
 app.post('/show', controllers.delete);  // 删除
 app.get('/edit', controllers.edit);   // 修改
