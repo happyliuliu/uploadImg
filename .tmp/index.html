@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>图片管理</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="https://g.alicdn.com/ais-fed/N3_2.0/2.0.7/css/N3.css">
+  </head>
+  <body>
+    <div class="sub-img">
+      <div class="head">上传一张图片<span>——生活点滴</span></div>
+      <form method="post" id="mypic" action="/upload" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="file" name="pic" class="btn btn-default">
+        </div>
+        <textarea placeholder="记录美好生活...." name="desc" class="description"></textarea><br>
+        <button type="submit" class="btn btn-info">提交</button>
+      </form>
+    </div>
+    <hr>
+    <div class="author">By yufan</div>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://g.alicdn.com/ais-fed/N3_2.0/2.0.7/js/N3.min.js"></script>
+  </body>
+</html>

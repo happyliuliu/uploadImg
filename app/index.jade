@@ -1,12 +1,29 @@
 doctype html
 html(lang="en")
 	head
-		title 数据统计
-		link(rel="stylesheet",href="./styles/reset.css")
-		link(rel="stylesheet",href="./styles/main.css")
+		meta(charset="UTF-8")
+		title 图片管理
+		link(rel="stylesheet" href="./styles/reset.css")
+		link(rel="stylesheet" href="./styles/main.css")
+		link(rel="stylesheet" href="https://g.alicdn.com/ais-fed/N3_2.0/2.0.7/css/N3.css")
 	body
-		include ./html/topbar
-		.main
-			.side-bar
-				include ./html/sidebar
-			include ./html/content
+		.sub-img
+			.head
+				上传一张图片
+				span
+					——生活点滴
+			form(method="post" id="mypic" action="/upload" enctype="multipart/form-data")
+				.form-group
+					input(type="file" name="pic" class="btn btn-default")
+				textarea.description(placeholder="记录美好生活...." name="desc")
+				br
+				button(type="submit" class="btn btn-info")
+					提交
+		hr
+		div.author By yufan
+		
+		script(src="/vendor/jquery/dist/jquery.min.js")
+		script(src="https://g.alicdn.com/ais-fed/N3_2.0/2.0.7/js/N3.min.js")
+
+
+		

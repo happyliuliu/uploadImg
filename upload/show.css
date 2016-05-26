@@ -1,0 +1,28 @@
+.sub-img {	
+	width: 400px;
+	margin: 30px auto;
+}
+h3.head {
+	width: 220px;
+	text-align:center;
+	margin: 20px auto;
+	
+}
+dl {
+	font-size: 18px;
+}
+p.description {
+	margin-top: 5px;
+	font-size: 16px;
+}
+.sub-img img {
+	width: 400px;
+	margin-bottom: 5px;
+}
+.sub-img span {
+	margin-right: 3px;
+}
+.deleteBtn,.updateBtn{
+	padding: 2px 6px;
+	margin-right: 10px;
+}

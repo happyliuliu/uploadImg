@@ -1,9 +1,6 @@
 {
   "name": "seven",
   "version": "0.0.0",
-  "authors": [
-    "siwei.ransw <siwei.ransw@alibaba-inc.com>"
-  ],
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -15,8 +12,9 @@
   ],
   "dependencies": {
     "jquery": "~2.1.0",
-    "angular": "~1.2.14",
-    "highcharts": "~3.0.7",
     "requirejs": "~2.1.11"
+  },
+  "resolutions": {
+    "jquery": "~2.1.0"
   }
 }

@@ -1,0 +1,48 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 数据统计
+		link(rel="stylesheet" href="https://g.alicdn.com/ais-fed/N3_2.0/2.0.7/css/N3.css")
+	style.
+		div.head {
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+		.sub-img {
+			width: 400px;
+			margin: 20px auto;
+		}
+		img {
+			width: 400px;
+			margin-bottom: 5px;
+		}
+		textarea.description {
+			width: 300px;
+			height:100px;
+			padding: 3px;
+			margin-bottom: 8px;
+			font-size: 12px;
+			border: 1px solid #ccc;
+			border-radius: 2px;
+		}
+		.form-group input {
+			margin-top: 10px;
+		}
+	body
+		.sub-img
+			.head
+				替换你喜欢的图片~~~
+			img(src=arr.url)			
+			span.fa.fa-clock-o
+			span=arr.postTime
+			form(method="post" action="/edit" enctype="multipart/form-data")
+				.form-group
+					input(type="file" name="newPic" class="btn btn-default")
+				textarea.description(placeholder="记录美好生活...." name="newDesc")=arr.description
+				input(type="hidden" name="fileId" value=dataId)
+				br
+				button(type="submit" class="btn btn-info")
+					修改											
+		script(src="/vendor/jquery/dist/jquery.min.js")
+		script(src="https://g.alicdn.com/ais-fed/N3_2.0/2.0.7/js/N3.min.js")

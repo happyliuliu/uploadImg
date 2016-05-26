@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		title 数据展示
+		link(rel="stylesheet" href="https://g.alicdn.com/ais-fed/N3_2.0/2.0.7/css/N3.css")
+		link(rel="stylesheet" href="img/show.css")
+	body
+		h3.head
+			随时分享，美丽瞬间
+		hr
+		each item in arr 
+			.sub-img
+				img(src=item.url)			
+				span.fa.fa-clock-o
+				span=item.postTime
+				p.description
+					label
+						分享：
+					span=item.description				
+				a.updateBtn.btn.btn-default(href='/edit?id='+item.id)
+					修改
+				<span class="fa fa-trash-o" aria-hidden="true"></span>
+				button.deleteBtn.btn.btn-default(id=item.id)
+					删除
+		
+		script(src="http://g.alicdn.com/platform/lib/1.0.26/1-jquery/jquery-1.10.2.min.js")
+		script(src="img/delete.js")
+
+
+		

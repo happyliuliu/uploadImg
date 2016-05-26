@@ -1,9 +1,9 @@
 'use strict';
 //var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
 var mountFolder = function(connect, dir) {
+	console.log(require('path').resolve(dir));
 	return connect.static(require('path').resolve(dir));
 };
-
 
 module.exports = function(grunt) {
 	// load all grunt tasks
@@ -12,15 +12,15 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		watch: {
 			options: {
-      	livereload: true
-    	},
+	      		livereload: true
+	    	},
 			scripts: {
 				files: ['app/**/*.{js,css,png,jpg,jpeg,webp}'],
-				tasks: ['copy:debug']
+				tasks: ['jshint','copy:debug']
 			},
-			compass: {
-				files: ['app/**/*.{scss,sass}'],
-				tasks: ['compass:debug']
+			less: {
+				files: ['app/**/*.less'],
+				tasks: ['less:debug']
 			},
 			jade: {
 				files: ['app/**/*.jade'],
@@ -35,6 +35,8 @@ module.exports = function(grunt) {
 				tasks: ['coffee:debug']
 			}
 		},
+
+		// 开启本地服务
 		connect: {
 			options: {
 				port: '9876',
@@ -44,7 +46,9 @@ module.exports = function(grunt) {
 				options: {
 					middleware: function(connect) {
 						return [
-						mountFolder(connect, '.tmp')];
+						mountFolder(connect, '.tmp'),
+						require("./app.js")
+						];
 					}
 				}
 			},
@@ -57,22 +61,28 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
+		// 自动在浏览器打开
 		open: {
 			server: {
 				path: 'http://localhost:<%= connect.options.port %>'
 			}
 		},
+
+		// 删除
 		clean: {
 			debug: '.tmp',
 			dist: ['dist/*'],
 		},
+
+		// 检查js文件语法错误
 		jshint: {
 			options: {
-				jshintrc: '.jshintrc'
+				jshintrc: true
 			},
-			all: [
-				'app/scripts/{,*/}*.js']
+			all: ['app/scripts/{,*/}*.js']
 		},
+
 		coffee: {
 			debug: {
 				files: [{
@@ -93,27 +103,38 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-		compass: {
+		//  将less文件转化为css文件
+		less: {
 			debug: {
 				options: {
-					cssDir: '.tmp',
-					sassDir: 'app',
-					imagesDir: 'app/images',
-					relativeAssets : true,
-					httpGeneratedImagesPath : '/images',
-					generatedImagesDir : '.tmp/images'
-				}
+                    compress: true,  //压缩去除空白
+                    yuicompress: true,
+                    optimization: 2
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'app/',
+                    src:['**/*.less'],
+                    dest: '.tmp/',
+                    ext: '.css'
+                }]
 			},
 			dist: {
 				options: {
-					sassDir: 'app',
-					cssDir: 'dist',
-					imagesDir: 'app/images',
-					environment: 'production',
-					//outputStyle:'expanded',
-				}
+                    compress: true,  //压缩去除空白
+                    yuicompress: true,
+                    optimization: 2
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'app/',
+                    src:['**/*.less'],
+                    dest: '.tmp/',
+                    ext: '.css'
+                }]
 			}
 		},
+
 		jade: {
 			debug: {
 				options: {
@@ -146,6 +167,8 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+
+		// 压缩js文件
 		uglify: {
 			dist: {
 				options:{
@@ -153,6 +176,8 @@ module.exports = function(grunt) {
                 }
 			}
 		},
+
+		// 压缩图片
 		imagemin: {
 			dist: {
 				files: [{
@@ -163,12 +188,14 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+
+		// 复制
 		copy: {
 			debug: {
 				files: [{
 					expand: true,
 					cwd: 'app',
-					src: ['**/*.{css,js,png,jpg,jpeg,html,svg,eot,ttf,woff}'],
+					src: ['**/*.{css,js,png,JPG,jpg,jpeg,html,svg,eot,ttf,woff}'],
 					dest: '.tmp'
 				}]
 			},
@@ -191,13 +218,14 @@ module.exports = function(grunt) {
 
 		grunt.task.run([
 			'clean:debug',
-			'compass:debug',
+			'less:debug',
 			'coffee:debug',
 			'jade:debug',
 			'connect:debug',
 			'copy:debug',
-			'open',
-			'watch']);
+			// 'open',
+			'watch'
+			]);
 	});
 
 	grunt.registerTask('test', [
@@ -213,6 +241,6 @@ module.exports = function(grunt) {
 		'uglify',
 		'copy:dist']);
 
-	grunt.registerTask('default', [
-		'server','jshint']);
+	grunt.registerTask('default', ['jshint',
+		'server']);
 };
