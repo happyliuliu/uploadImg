@@ -33,6 +33,8 @@ var jsonWrite = function(res, ret) {
 
 module.exports = {
 	upload: function(req, res) {
+		//console.log(req);
+		//console.log();
 		var desc = req.body.desc;
 		var objFile = req.files.pic;
 		if (!objFile.originalFilename) {
@@ -98,7 +100,7 @@ module.exports = {
 	 			});
 
 	 			res.render('show',{
-	 				arr: _result,
+	 				arr: _result
 	 			});
 	 			conncetion.release();
 	 		})
@@ -149,7 +151,7 @@ module.exports = {
 	 			// console.log(_result[0]);
 	 			res.render('edit',{
  					arr: _result[0],
- 					dataId: id,
+ 					dataId: id
  				});
 	 			res.end();
 	 			conncetion.release();
